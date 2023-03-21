@@ -5,6 +5,7 @@ import pandas
 BACKGROUND_COLOR = "#B1DDC6"
 current_card = {}
 
+# ------------------------------------- READ CSV ------------------------------------- #
 try:
     data = pandas.read_csv("data/words_to_learn.csv")
     to_learn = data.to_dict(orient="records")
@@ -13,6 +14,7 @@ except FileNotFoundError:
     to_learn = data.to_dict(orient="records")
 
 
+# ------------------------------------ FLIP CARD ------------------------------------ #
 def next_card():
     global current_card, timer
     window.after_cancel(timer)
@@ -29,6 +31,7 @@ def english_card():
     canvas.itemconfig(card_word, fill="white", text=current_card["English"])
 
 
+# ---------------------------------- CREATE NEW CSV ---------------------------------- #
 def is_known():
     to_learn.remove(current_card)
     to_learn_df = pandas.DataFrame(to_learn)
